@@ -9,3 +9,7 @@
 #root {
   height: 100svh;
 }
+
+canvas {
+  touch-action: none;
+}
