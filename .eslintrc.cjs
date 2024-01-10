@@ -18,7 +18,16 @@ module.exports = {
     ],
     'react/no-unknown-property': [
       'error',
-      { ignore: ['object', 'attach', 'args', 'position'] },
+      {
+        ignore: [
+          'object',
+          'attach',
+          'args',
+          'position',
+          'intensity',
+          'rotation',
+        ],
+      },
     ],
   },
 };
