@@ -16,5 +16,18 @@ module.exports = {
       'warn',
       { allowConstantExport: true },
     ],
+    'react/no-unknown-property': [
+      'error',
+      {
+        ignore: [
+          'object',
+          'attach',
+          'args',
+          'position',
+          'intensity',
+          'rotation',
+        ],
+      },
+    ],
   },
-}
+};

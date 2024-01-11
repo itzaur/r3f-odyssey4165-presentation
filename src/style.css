@@ -1,3 +1,11 @@
+:root {
+  --color-bg: #000000;
+}
+
+html {
+  font-size: 62.5%;
+}
+
 *,
 *::before,
 *::after {
@@ -7,5 +15,27 @@
 }
 
 #root {
-  height: 100svh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+canvas {
+  touch-action: none;
+}
+
+.html-screen iframe {
+  width: 102.4rem;
+  height: 67rem;
+
+  border: none;
+  border-radius: 2rem;
+
+  background-color: var(--color-bg);
+}
+
+.iframe {
+  opacity: 0;
 }
