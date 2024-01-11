@@ -9,6 +9,7 @@ import {
   Float,
   Html,
   PresentationControls,
+  Sparkles,
   Text3D,
   useGLTF,
   useMatcapTexture,
@@ -31,10 +32,22 @@ export default function Experience() {
   const options = useControls({
     debug: { value: false },
     colorBackground: {
-      value: '#fcfad9',
+      value: '#141313',
     },
     colorScreen: {
       value: '#4fe1e3',
+    },
+  });
+
+  const { colorSparkles, sizeSparkles } = useControls('sparkles', {
+    colorSparkles: {
+      value: '#4fe1e3',
+    },
+    sizeSparkles: {
+      value: 4,
+      min: 2,
+      max: 30,
+      step: 0.01,
     },
   });
 
@@ -47,7 +60,7 @@ export default function Experience() {
   const { viewport } = useThree();
 
   // Use texture with updating
-  const [matcapTexture] = useMatcapTexture('394641_B1A67E_75BEBE_7D7256', 256);
+  const [matcapTexture] = useMatcapTexture('2D2D2F_C6C2C5_727176_94949B', 256);
 
   useEffect(() => {
     params.material.matcap = matcapTexture;
@@ -157,7 +170,7 @@ export default function Experience() {
     curveSegments: 12,
     position: [
       viewport.aspect > 1 ? -4 : -1.5,
-      viewport.aspect > 1 ? 3.6 : 2,
+      viewport.aspect > 1 ? 3 : 1,
       -4,
     ],
     textAlign: 'center',
@@ -165,8 +178,12 @@ export default function Experience() {
 
   // Stop initial camera animation when page size is changed
   useEffect(() => {
-    window.addEventListener('resize', () => {
-      controls.current._enabled = false;
+    ['resize', 'mousedown'].forEach((e) => {
+      window.addEventListener(e, () => {
+        if (controls) {
+          controls.current._enabled = false;
+        }
+      });
     });
   }, []);
 
@@ -179,7 +196,7 @@ export default function Experience() {
       <color attach='background' args={[options.colorBackground]} />
 
       <ContactShadows
-        position={[0, -1.4, 0]}
+        position={[0, -1.8, 0]}
         scale={5 * params.scaleMax}
         blur={2.4}
         opacity={0.4}
@@ -218,7 +235,7 @@ export default function Experience() {
           />
           <primitive
             object={laptop.scene}
-            position={[0, -1.2, 0]}
+            position={[0, -1.6, 0]}
             scale={viewport.aspect > 1 ? params.scaleMax : params.scaleMin}
           >
             <Html
@@ -238,6 +255,14 @@ export default function Experience() {
           <Text3D {...textOptions}>Space Odyssey [4165]</Text3D>
         </Float>
       </PresentationControls>
+
+      <Sparkles
+        count={500}
+        speed={0.6}
+        color={colorSparkles}
+        size={sizeSparkles}
+        scale={20}
+      />
     </>
   );
 }
